@@ -1,1 +1,117 @@
-testing 1...2...3
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RobotDriver.dev</title>
+<meta name="description" content="Learn how to build and drive your own robot!">
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<style>
+body,html {
+	font-family: arial;
+}
+.intro {
+	text-align: center;
+}
+.maintitle {
+	font-size: 20px;
+	font-weight: bolder;
+	margin:20px;
+}
+.main {
+	font-size: 16px;
+}
+code {
+	background: #555;
+    border-radius: 5px;
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.9em;
+    margin: 0 0.25em;
+    padding: 0.25em 0.65em;
+}
+.textblock {
+	text-align: left;
+	display: inline-block;
+	background-color: #afafaf;
+    padding: 5px;
+    border-radius: 10px;
+}
+.sectionheader {
+	text-decoration: underline;
+	font-size: 50px;
+	text-align: center;
+}
+.instructions-wrap {
+	text-align: center;
+}
+.instructions {
+	text-align: left;
+	margin:auto;
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+<div class="intro">
+	<div class="maintitle">
+	RobotDriver.Dev
+	</div>
+	<P>Learn how to build and drive your own robot!</P>
+	<P>Install RobotDriver:</P>
+	<code>curl -L https://install.robotdriver.dev | sudo bash</code>
+	<P>Run RobotDriver (After Install):</P>
+	<code>sudo node /usr/local/robotdriver/robotdriver.js</code>
+	<P class="main">Source code available on <a href="https://github.com/RobotDriver/RobotDriver">Github</a><BR>
+	<a class="github-button" href="https://github.com/RobotDriver/RobotDriver" data-size="large" aria-label="Star RobotDriver/RobotDriver on GitHub">Star</a>
+</div>
+<h2 class="sectionheader">Raspberry Pi Setup</h2>
+<div class="instructions-wrap">
+<div class="instructions">
+	<P><B>These instructions create a headless raspberry pi for your robot</B></P>
+	<UL>
+	<LI><P>Download Raspbian Buster Lite from <a href="https://www.raspberrypi.org/downloads/raspbian/">https://www.raspberrypi.org/downloads/raspbian/</a></P></LI>
+	<LI><P>Extract the Raspbian .img from the .zip file</P></LI>
+	<LI><P>Download Rufus to burn the SD card <a href="https://rufus.ie/">https://rufus.ie/</a></P></LI>
+	<LI><P>Launch Rufus and select the .img file and click Start to burn the SD card</P></LI>
+	<P><img src="screenshot rufus.png"></P>
+	<LI><P>After rufus is finished you will see a new drive on your computer named "boot"</P></LI>
+	<LI><P>Right click select New -> Text File. Name the file "wpa_supplicant.conf"</P></LI>
+	<LI><P>Use Notepad to edit the "wpa_supplicant.conf" file you just created.</P></LI>
+	<LI><P>Paste this into the file and update the wifi login info</P></LI>
+	<div class="textblock"><PRE>ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=US
+network={
+    ssid="<B>WifiNameHere</B>"
+    psk="<B>WifiPasswordHere</B>"
+}</PRE></div>
+	<LI><P>Right click select New -> Text File. Name the file "ssh". Leave this file blank. This will enable SSH access.</P></LI>
+	<LI><P>Remove your SD card and install into the raspberry pi.</P></LI>
+	<LI><P>Plug in the power to boot the raspberry pi.</P></LI>
+	<LI><P>Download and install <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a></P></LI>
+	<LI><P>Launch putty and enter "raspberrypi.local" for Host Name. Click Open.</P></LI>
+	<P><img src="screenshot putty.png"></P>
+	<LI><P>If your pi is successfully connecting to your wifi you will get a "login as:" prompt. Type "pi" for the user. The password is "raspberry"</P></LI>
+	<LI><P>After putty is connected run the commands to install and run RobotDriver</P></LI>
+	<LI><P>Install RobotDriver: <code>curl -L https://install.robotdriver.dev | sudo bash</code></P></LI>
+	<P><img src="screenshot putty install.png"></P>
+	<LI><P>Run RobotDriver: <code>sudo node /usr/local/robotdriver/robotdriver.js</code></P></LI>
+	<P><img src="screenshot robot driver running.png"></P>
+	<LI><P>After RobotDriver is running open your web browser to http://raspberrypi.local</P></LI>
+	</UL>
+</div>
+</div>
+	<h2 class="sectionheader">Hardware</h2>
+<div class="instructions-wrap">
+<div class="instructions">
+	<P>Connect a USB webcam to your Raspberry Pi. The Logitech C920 works great.</P>
+	<P>Connect an L298N motor driver to your Raspberry Pi</P>
+	<P><img src="robot_pi_connections.jpg"></P>
+	<P>Here is a full wiring diagram with a LM2596 regulator (adjust to 5v) to power the raspberry pi:</P>
+	<P><a href="raspberry_pi_l298n_motor_wiring.pdf"><img src="page_white_acrobat.png"> PDF Download</a></P>
+	<P><img src="raspberry_pi_l298n_motor_wiring.png"></P>
+</div>
+</div>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
